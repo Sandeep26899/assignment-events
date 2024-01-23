@@ -1,0 +1,27 @@
+# Dependency directories
+node_modules/
+
+# Compiled TypeScript
+dist/
+
+# Local environment files
+.env
+
+# Logs
+*.log
+
+# IDE and editor files
+.idea/
+.vscode/
+*.code-workspace
+
+# Ignore compiled binary files
+*.db
+*.sqlite
+*.bin
+
+# Test coverage directory
+coverage/
+
+# Ignore TypeScript declaration files
+*.d.ts
