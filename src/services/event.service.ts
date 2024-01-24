@@ -2,15 +2,31 @@ import cron from 'node-cron';
 import EventScanner from '../services/eventScanner';
 import { EventModel } from '../models/feecollectedevent';
 import { config } from '../config/config';
+import { ethers } from 'ethers';
 
 class EventService {
   static async getEventsForIntegrator(integrator: string){
-    const data = await EventModel.find({ 'args.integrator': integrator }).exec();
+    const isAddress = ethers.utils.isAddress(integrator);
+    if(!isAddress){
+      return {
+        error: true,
+        message: "Please provide a valid integrator",
+        data: null
+      } 
+    }
+    const data = await EventModel.find({ 'args.integrator': integrator });
+    if(data.length > 0){
+      return {
+        error: false,
+        message: "Events fetched successfully",
+        data: data
+      }
+    }
     return {
       error: false,
-      message: "Events fetched successfully",
+      message: "No event found",
       data: data
-    }
+    } 
   }
   
 

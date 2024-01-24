@@ -13,7 +13,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "declaration": true,
-    "types": ["node"],
+    "types": ["node", "jest"],
     "lib": ["es2018"]
   },
   "include": ["src/**/*.ts"],

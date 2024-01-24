@@ -24,7 +24,6 @@ class App {
     this.app.get('/events/:integrator', async (req, res) => {
       try {
         const integrator = req.params.integrator;
-        console.log('first', integrator);
         const events = await EventService.getEventsForIntegrator(integrator);
         res.json(events);
       } catch (error) {

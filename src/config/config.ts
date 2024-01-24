@@ -1,5 +1,5 @@
 export const config = {
-  port: 5000,
+  port: 4000,
   chain: {
     polygon: {
       chainId: 137,
