@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "start": "ts-node src/server.ts"
+    "dev": "ts-node src/server.ts",
+    "build": "rm -r dist && npx tsc",
+    "start": "npm run build &&  node dist/server.js"
   },
   "jest": {
     "preset": "ts-jest",

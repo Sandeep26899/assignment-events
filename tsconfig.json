@@ -2,7 +2,7 @@
   "compilerOptions": {
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "ES2018",
+    "target": "ESNext", // Updated to the latest ECMAScript version
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,

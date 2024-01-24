@@ -9,6 +9,7 @@ dist/
 
 # Logs
 *.log
+package-lock.json
 
 # IDE and editor files
 .idea/

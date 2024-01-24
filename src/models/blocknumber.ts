@@ -1,11 +1,11 @@
 import { prop, getModelForClass } from '@typegoose/typegoose';
 
-export class FeeCollectedEvent {
+export class BlockNumber {
   @prop({ required: true, default: null })
   blockNumber!: number;
 
   @prop({ required: true, default: null })
-  integrator!: string;
+  chain!: string;
 }
 
-export const FeeCollectedEventModel = getModelForClass(FeeCollectedEvent);
+export const BlockNumberModel = getModelForClass(BlockNumber);
