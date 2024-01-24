@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "dev": "ts-node src/server.ts",
-    "build": "rm -r dist && npx tsc",
+    "build": "rm -rf dist && npx tsc",
     "start": "npm run build &&  node dist/server.js"
   },
   "jest": {

@@ -4,6 +4,8 @@ node_modules/
 # Compiled TypeScript
 dist/
 
+logs
+
 # Local environment files
 .env
 

@@ -1,6 +1,7 @@
 import express from 'express';
 import Database from './config/db.config';
 import EventService from './services/event.service';
+import { config } from './config/config';
 
 class App {
   private app: express.Application;
@@ -8,7 +9,7 @@ class App {
 
   constructor() {
     this.app = express();
-    this.port = 3000;
+    this.port = config.port;
 
     this.initializeMiddlewares();
     this.initializeRoutes();
@@ -23,6 +24,7 @@ class App {
     this.app.get('/events/:integrator', async (req, res) => {
       try {
         const integrator = req.params.integrator;
+        console.log('first', integrator);
         const events = await EventService.getEventsForIntegrator(integrator);
         res.json(events);
       } catch (error) {

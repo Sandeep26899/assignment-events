@@ -5,16 +5,23 @@ import FeeCollectorABI from "../abi/FeeCollector.ABI.json";
 import logger from "../log";
 import { EventModel } from "../models/feecollectedevent";
 
+interface chainInterface {
+  chainId: number;
+  rpcUrl: string;
+  feeCollectorAddress: string;
+  oldestBlock: number;
+}
 class EventScanner {
   private provider: providers.JsonRpcProvider;
   private feeCollectorContract: Contract;
-
-  constructor() {
+  private chain: chainInterface
+  constructor(chain: chainInterface) {
+    this.chain = chain;
     this.provider = new ethers.providers.JsonRpcProvider(
-      config.chain.polygon.rpcUrl
+      chain.rpcUrl
     );
     this.feeCollectorContract = new ethers.Contract(
-      config.chain.polygon.feeCollectorAddress,
+      chain.feeCollectorAddress,
       FeeCollectorABI,
       this.provider
     );
@@ -89,7 +96,7 @@ class EventScanner {
     try {
       // Get the latest saved block number from the database
       const latestBlockInDb = await this.getStartEndBlock(
-        config.chain.polygon.oldestBlock,
+        this.chain.oldestBlock,
         "polygon"
       );
       console.log(
@@ -119,16 +126,6 @@ class EventScanner {
         );
       }
 
-      // Use the latest saved block number or the configured oldest block as the starting point
-      // const startBlock = latestBlockInDb ? latestBlockInDb.blockNumber + 1 : config.chain.polygon.oldestBlock;
-      // const latestBlock = startBlock + 1000;
-
-      // if (startBlock <= latestBlock) {
-
-      // } else {
-      //   logger.info('No new blocks to scan.');
-      // }
-
       // Update the latest block number in the database
     } catch (error) {
       logger.error(`Error during event scanning: ${error}`);
@@ -148,9 +145,9 @@ class EventScanner {
 
   private async processEvent(event: Event): Promise<void> {
     console.log("eventevent", event);
-   if(!event||!event.args){
-       return 
-   }
+    if (!event || !event.args) {
+      return
+    }
     // Assuming `event` is your input object
     const args = {
       token: event.args._token,
